@@ -7,6 +7,8 @@ let AssignmentSchema = Schema({
     dateDeRendu: Date,
     nom: String,
     rendu: Boolean
+}, {
+    collection: "assignments"
 });
 
 AssignmentSchema.plugin(mongoosePaginate);
