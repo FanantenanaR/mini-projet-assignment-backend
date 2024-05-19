@@ -1,7 +1,7 @@
 let express = require('express');
 let app = express();
 let bodyParser = require('body-parser');
-let assignment = require('./controller/assignments');
+let assignment = require('./controller/assignment.controller');
 
 let mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
@@ -20,18 +20,10 @@ const options = {
 
 require("dotenv").config();
 
-const connectDB = require('./configuration/database');
+const connectDB = require('./configuration/database.configuration');
 connectDB();
 
-// mongoose.connect(uri)
-//   .then(() => {
-//     console.log("Connecté à la base MongoDB assignments dans le cloud !");
-//     console.log("at URI = " + uri);
-//     console.log("vérifiez with http://localhost:" + port + "/api/assignments que cela fonctionne")
-//   },
-//     err => {
-//       console.log('Erreur de connexion: ', err);
-//     });
+const indexRouter = require('./routes/index.routes');
 
 // Pour accepter les connexions cross-domain (CORS)
 app.use(function (req, res, next) {
@@ -48,19 +40,7 @@ app.use(bodyParser.json());
 // Obligatoire si déploiement dans le cloud !
 let port = process.env.PORT || 8010;
 
-// les routes
-const prefix = '/api';
-
-// http://serveur..../assignments
-app.route(prefix + '/assignments')
-  .post(assignment.postAssignment)
-  .put(assignment.updateAssignment)
-  .get(assignment.getAssignments);
-
-app.route(prefix + '/assignments/:id')
-  .get(assignment.getAssignment)
-  .delete(assignment.deleteAssignment);
-
+app.use('/', indexRouter);
 
 // On démarre le serveur
 app.listen(port, "0.0.0.0");
