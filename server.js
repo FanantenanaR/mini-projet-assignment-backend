@@ -20,6 +20,9 @@ const options = {
 
 require("dotenv").config();
 
+const cors = require("cors")
+app.use(cors())
+
 const connectDB = require('./configuration/database.configuration');
 connectDB();
 
