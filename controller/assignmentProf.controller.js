@@ -1,6 +1,7 @@
 const {getAllProfAssignment, insertProfAssignment} = require("../service/assignmentProf.service");
 const {getProfById} = require("../service/prof.service");
 const {getSubjectById} = require("../service/subject.service");
+const {evaluateStudentAssignment} = require("../service/assignmentStudent.service");
 
 const getAllProfAssignmentEndPoint = async (request, response) => {
     const {id} = request.params;
@@ -54,7 +55,29 @@ const insertAssignmentProfEndPoint = async (request, response) => {
     });
 }
 
+const evaluateAssignmentStudentEndPoint = async (request, response) => {
+    const { assignementStudentId, note, remark = "" } = request.body;
+    console.log(request.body);
+
+    if (!assignementStudentId) {
+        response.status(400).json({ message: `Assignment should be given`});
+    }
+
+    if (!note) {
+        response.status(400).json({ message: `Note should be given`});
+    }
+
+    const resultat = await evaluateStudentAssignment(assignementStudentId, parseFloat(note), remark, Date.now());
+
+    response.status(201).json({
+        status: 201,
+        message: "Success",
+        data: resultat
+    })
+}
+
 module.exports = {
     getAllProfAssignmentEndPoint,
-    insertAssignmentProfEndPoint
+    insertAssignmentProfEndPoint,
+    evaluateAssignmentStudentEndPoint
 }

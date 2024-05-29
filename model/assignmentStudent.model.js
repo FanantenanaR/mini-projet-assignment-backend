@@ -3,14 +3,9 @@ let Schema = mongoose.Schema;
 const mongoosePaginate = require('mongoose-aggregate-paginate-v2');
 
 const AssignmentStudentSchema = new Schema({
-    id: { 
-        type: String, 
-        required: true, 
-        unique: true 
-    },
     assignment: { 
-        id: { 
-            type: String, 
+        _id: {
+            type: mongoose.Schema.Types.ObjectId,
             required: true 
         },
         title: { 
@@ -23,14 +18,38 @@ const AssignmentStudentSchema = new Schema({
         },
         deadline: { 
             type: Date, 
-            required: true 
+            default: null
         },
         dateCreated: { 
             type: Date, 
-            default: Date.now 
+            default: null
+        },
+        prof: {
+            _id: mongoose.Schema.Types.ObjectId,
+            name: {
+                type: String,
+                required: true
+            },
+            profilePicture: {
+                type: String,
+                required: true,
+                default: ""
+            }
+        },
+        subject: {
+            _id: mongoose.Schema.Types.ObjectId,
+            title: {
+                type: String,
+                required: true
+            },
+            illustration: {
+                type: String,
+                default: ""
+            },
         }
     },
     student: {
+        _id: mongoose.Schema.Types.ObjectId,
         name: { 
             type: String, 
             required: true 
@@ -38,6 +57,10 @@ const AssignmentStudentSchema = new Schema({
         email: { 
             type: String, 
             required: true 
+        },
+        profilePicture: {
+            type: String,
+            default: ""
         }
     },
     remarkFromStudent: { 
@@ -51,10 +74,12 @@ const AssignmentStudentSchema = new Schema({
         type: Number 
     },
     dateEvaluation: { 
-        type: Date 
+        type: Date,
+        default: null
     },
     remark: { 
-        type: String 
+        type: String,
+        default: ''
     }
 }, {
     collection: 'assignmentStudent'

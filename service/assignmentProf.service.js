@@ -21,5 +21,5 @@ const insertProfAssignment = async (assignment, prof, subject, dateCreated = Dat
 
 module.exports = {
     getAllProfAssignment,
-    insertProfAssignment
+    insertProfAssignment,
 }
