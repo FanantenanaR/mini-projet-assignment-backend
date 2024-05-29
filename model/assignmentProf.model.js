@@ -3,11 +3,6 @@ let Schema = mongoose.Schema;
 const mongoosePaginate = require('mongoose-aggregate-paginate-v2');
 
 const AssignmentProfSchema = new Schema({
-    id: { 
-        type: String, 
-        required: true, 
-        unique: true 
-    },
     title: { 
         type: String, 
         required: true 
@@ -17,13 +12,38 @@ const AssignmentProfSchema = new Schema({
         required: true 
     },
     deadline: { 
-        type: Date, 
-        required: true 
+        type: Date,
+        default: null
     },
     dateCreated: { 
         type: Date, 
         default: Date.now 
+    },
+    prof: {
+        _id: mongoose.Schema.Types.ObjectId,
+        name: {
+            type: String,
+            required: true
+        },
+        profilePicture: {
+            type: String,
+            required: true,
+            default: ""
+        }
+    },
+    subject: {
+        _id: mongoose.Schema.Types.ObjectId,
+        title: {
+            type: String,
+            required: true
+        },
+        illustration: {
+            type: String,
+            default: ""
+        },
     }
+}, {
+    collection: 'assignmentProf'
 });
 AssignmentProfSchema.plugin(mongoosePaginate);
 

@@ -40,10 +40,6 @@ const AssignmentStudentSchema = new Schema({
             required: true 
         }
     },
-    filename: { 
-        type: String, 
-        required: true 
-    },
     remarkFromStudent: { 
         type: String 
     },
@@ -60,6 +56,8 @@ const AssignmentStudentSchema = new Schema({
     remark: { 
         type: String 
     }
+}, {
+    collection: 'assignmentStudent'
 });
 
 AssignmentStudentSchema.plugin(mongoosePaginate);

@@ -8,6 +8,18 @@ const getAllProfAssignment = async (id) => {
     }
 }
 
+const insertProfAssignment = async (assignment, prof, subject, dateCreated = Date.now()) => {
+    return await AssignmentProf.create({
+        title: assignment.title,
+        description: assignment.description,
+        deadline: assignment.deadline,
+        subject: subject,
+        prof: prof,
+        dateCreated: dateCreated,
+    });
+}
+
 module.exports = {
-    getAllProfAssignment
+    getAllProfAssignment,
+    insertProfAssignment
 }

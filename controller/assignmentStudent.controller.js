@@ -10,7 +10,7 @@ const getAllStudentAssignmentEndPoint = async (request, response) => {
             response.status(200).json({
                 status: 200,
                 message: "Success",
-                data: assignments
+                datas: assignments
             });
         }
     } catch (error) {
