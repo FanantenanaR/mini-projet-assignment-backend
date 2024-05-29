@@ -1,7 +1,11 @@
 const AssignmentStudent = require("../model/assignmentStudent.model");
 
-const getAllStudentAssignment = async () => {
-    return await AssignmentStudent.find();
+const getAllStudentAssignment = async (id) => {
+    if (id) {
+        return await AssignmentStudent.findById(id);
+    } else {
+        return await AssignmentStudent.find();
+    }
 }
 
 module.exports = {

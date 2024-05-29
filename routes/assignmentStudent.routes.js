@@ -3,6 +3,6 @@ const router = express.Router();
 
 const { getAllStudentAssignmentEndPoint } = require('../controller/assignmentStudent.controller');
 
-router.get('/', getAllStudentAssignmentEndPoint);
+router.get('/:id?', getAllStudentAssignmentEndPoint);
 
 module.exports = router
