@@ -23,8 +23,12 @@ const getAllSubject = async (title = null, prof = null, orderBy= {}, doPaginatio
         };
 
         // Ajout du choix du prof si donnée en argument
-        let filter = {
-            ...(prof && { prof: new ObjectId(prof) })
+        let filter = {}
+        if (prof !== null) {
+            filter = {
+                ...filter,
+                prof: prof
+            }
         }
 
         // Utilisation du input
@@ -58,7 +62,20 @@ const getAllSubject = async (title = null, prof = null, orderBy= {}, doPaginatio
             };
             return await Subject.aggregatePaginate(Subject.aggregate(aggregateQuery), options);
         } else {
-            return await Subject.aggregate(aggregateQuery).exec();
+            const results = await Subject.aggregate(aggregateQuery).exec();
+            const totalDocs = results.length;
+            return {
+                docs: results,
+                totalDocs,
+                limit: totalDocs,
+                page: 1,
+                totalPages: 1,
+                pagingCounter: 1,
+                hasPrevPage: false,
+                hasNextPage: false,
+                prevPage: null,
+                nextPage: null
+            };
         }
     } catch (err) {
         throw new Error('Error retrieving subjects: ' + err.message);
@@ -67,7 +84,17 @@ const getAllSubject = async (title = null, prof = null, orderBy= {}, doPaginatio
 
 const getSubjectById = async (id) => {
     try {
-        const subject = await Subject.findById(id).populate('prof');
+        const subject = await Subject.findById(id).populate({
+            path: 'prof',
+            select: '-email -password -isAdmin'
+        });
+        if (subject) {
+            const subjectWithProfData = subject.toObject();
+            subjectWithProfData.profData = subjectWithProfData.prof;
+            subjectWithProfData.prof = subjectWithProfData.prof._id;
+
+            return subjectWithProfData;
+        }
         return subject;
     } catch (err) {
         throw new Error('Error retrieving subject by ID: ' + err.message);
@@ -89,11 +116,19 @@ const updateSubject = async (subject) => {
         if (!id) {
             throw new Error(`id required`);
         }
-        const updatedSubject = await Subject.findByIdAndUpdate(id, subject, {new: true});
-        if (!updatedSubject) {
+        const result = await Subject.findByIdAndUpdate(id, subject, {new: true});
+        if (!result) {
             throw new Error(`id ${id} not found `);
         }
-        return updatedSubject.populate('prof');
+        const updatedSubject =  result.populate({
+            path: 'prof',
+            select: '-email -password -isAdmin'
+        });
+        const subjectWithProfData = updatedSubject.toObject();
+        subjectWithProfData.profData = subjectWithProfData.prof;
+        subjectWithProfData.prof = subjectWithProfData.prof._id;
+
+        return subjectWithProfData;
     } catch (err) {
         throw new Error('Error updating subject: ' + err.message);
     }

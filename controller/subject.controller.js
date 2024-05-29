@@ -29,8 +29,14 @@ const getAllSubjectsEndPoint = async (request, response) => {
         }
 
         const { title, prof } = request.query;
-        let searchInput = !title ? null : isRegExp(title) ? new RegExp(title, "i") : title.toLowerCase();
-        const subjects = await getAllSubject(searchInput, prof, orderBy, doPagination, page, limit);
+        console.log("prof value", prof, typeof prof);
+        console.log("title value", title);
+        const searchInput =
+            !title || title.trim() === "null" || title.trim() === ""
+                ? null
+                : title.toLowerCase();
+        const searchProf = !prof || prof.trim() === "null" || prof.trim() === "" ? null : prof;
+        const subjects = await getAllSubject(searchInput, searchProf, orderBy, doPagination, page, limit);
         response.status(200).json(subjects);
     } catch (err) {
         response.status(500).json({ message: err.message });
@@ -81,7 +87,8 @@ const insertSubjectEndPoint = async (request, response) => {
 
 const updateSubjectEndPoint = async (request, response) => {
     try {
-        const { title, prof, illustration, id} = request.body;
+        const { title, prof, illustration} = request.body;
+        const id = request.params.id;
         if (!id) {
             response.status(400).json({ message: `Missing parameter: id`});
         } else {

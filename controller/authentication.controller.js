@@ -6,9 +6,10 @@ const loginStudentEndPoint = async (request, response) => {
         console.log("email", email);
         console.log("password", password);
         const resultat = await authenticationService.loginStudent(email, password);
+        console.log("result", resultat);
         if (!resultat) {
-            response.status(401).send({
-                status: 401,
+            response.status(404).send({
+                status: 404,
                 message: "User not found or the given credentials are incorrect"
             });
         } else {
@@ -35,9 +36,10 @@ const loginProfEndPoint = async (request, response) => {
         console.log("email", email);
         console.log("password", password);
         const resultat = await authenticationService.loginProf(email, password);
+        console.log("result", resultat);
         if (!resultat) {
-            response.status(401).send({
-                status: 401,
+            response.status(404).send({
+                status: 404,
                 message: "User not found or the given credentials are incorrect"
             });
         } else {
