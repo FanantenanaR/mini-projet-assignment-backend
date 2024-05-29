@@ -1,5 +1,4 @@
-const {getAllSubject, getSubjectById, insertSubject, updateSubject, deleteSubject} = require("../service/subject.service");
-const {getAllProf, getProfById, insertProf, deleteProf} = require("../service/prof.service");
+const {getAllProf, getProfById, insertProf, deleteProf, updateProf} = require("../service/prof.service");
 const {isRegExp} = require("../utils/string.util");
 
 const getAllProfEndPoint = async (request, response) => {
@@ -95,7 +94,8 @@ const insertProfEndPoint = async (request, response) => {
 
 const updateProfEndPoint = async (request, response) => {
     try {
-        const { firstname, lastname, profilPicture, isAdmin, email, password, id} = request.body;
+        const { firstname, lastname, profilPicture, isAdmin, email, password} = request.body;
+        const id = request.params.id;
         if (!id) {
             response.status(400).json({ message: `Missing parameter: id`});
         } else {
@@ -108,14 +108,15 @@ const updateProfEndPoint = async (request, response) => {
                 ...(email && { email }),
                 ...(password && { password })
             };
-            const newSubject = await updateSubject(update);
+            const newProf = await updateProf(update);
             response.status(201).json({
                 status: 201,
-                message: "Subject inserted",
-                data: newSubject
+                message: "Prof updated",
+                data: newProf
             });
         }
     } catch (err) {
+        console.log("err update prof", err)
         response.status(500).json({ message: err.message });
     }
 }
