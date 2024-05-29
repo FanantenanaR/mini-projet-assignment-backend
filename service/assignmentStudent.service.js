@@ -26,8 +26,13 @@ const evaluateStudentAssignment = async (assignemntStudentId, note, remark, date
     });
 }
 
+const getAssignmentStudentBySybject = async (subjectId) => {
+    return await AssignmentStudent.find({ "assignment.subject._id": subjectId });
+}
+
 module.exports = {
     getAllStudentAssignment,
     insertStudentAssignment,
-    evaluateStudentAssignment
+    evaluateStudentAssignment,
+    getAssignmentStudentBySybject
 }

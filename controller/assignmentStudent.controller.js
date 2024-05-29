@@ -1,4 +1,4 @@
-const { getAllStudentAssignment, insertStudentAssignment} = require('../service/assignmentStudent.service');
+const { getAllStudentAssignment, insertStudentAssignment, getAssignmentStudentBySybject} = require('../service/assignmentStudent.service');
 const {getStudentById} = require("../service/student.service");
 const {getAllProfAssignment} = require("../service/assignmentProf.service");
 
@@ -53,7 +53,27 @@ const insertAssignmentStudentEndPoint = async (request, response) => {
     })
 }
 
+const getAssignmentStudentBySybjectEndPoint = async (request, response) => {
+    const {subjectId} = request.params;
+    try {
+        const assignments = await getAssignmentStudentBySybject(subjectId);
+        if (!assignments) {
+            response.status(404).json({ message: 'Assignments not found' });
+        } else {
+            response.status(200).json({
+                status: 200,
+                message: "Success",
+                datas: assignments
+            });
+        }
+    } catch (error) {
+        console.error(error);
+        response.status(500).json({ message: 'Internal server error' });
+    }
+};
+
 module.exports = {
     getAllStudentAssignmentEndPoint,
-    insertAssignmentStudentEndPoint
+    insertAssignmentStudentEndPoint,
+    getAssignmentStudentBySybjectEndPoint
 };
