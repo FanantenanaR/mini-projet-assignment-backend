@@ -1,13 +1,13 @@
 const {getAllProfAssignment} = require("../service/assignmentProf.service");
 
 const getAllProfAssignmentEndPoint = async (request, response) => {
-    const subject = await getProfById(id);
+    const subject = await getAllProfAssignment();
             if (!subject) {
-                response.status(404).json({ message: 'Prof not found' });
+                response.status(404).json({ message: 'Prof assignments not found' });
             } else {
                 response.status(200).json({
                     status: 200,
-                    message: "A Prof",
+                    message: "Success",
                     data: subject
                 });
             }

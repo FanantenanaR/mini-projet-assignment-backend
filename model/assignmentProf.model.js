@@ -24,8 +24,9 @@ const AssignmentProfSchema = new Schema({
         type: Date, 
         default: Date.now 
     }
-  });
+});
+AssignmentProfSchema.plugin(mongoosePaginate);
 
-const AssignmentProf = mongoose.model('Assignment_prof', AssignmentProfSchema);
+const AssignmentProf = mongoose.model('AssignmentProf', AssignmentProfSchema, 'assignmentProf');
 
 module.exports = AssignmentProf;
