@@ -79,7 +79,7 @@ const insertProf = async (firstname, lastname = "", email, password, profilPictu
 
 const updateProf = async (prof) => {
     try {
-        const id = prof.id || prof._id;
+        const id = prof.id ?? prof._id;
         if (!id) {
             throw new Error(`id required`);
         }
