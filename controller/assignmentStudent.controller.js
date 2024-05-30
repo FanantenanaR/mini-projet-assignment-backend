@@ -9,11 +9,17 @@ const getAllStudentAssignmentEndPoint = async (request, response) => {
         if (!assignments) {
             response.status(404).json({ message: 'Assignments not found' });
         } else {
-            response.status(200).json({
+            const result = {
                 status: 200,
-                message: "Success",
-                datas: assignments
-            });
+                message: "Success"
+            }
+
+            if(id) {
+                result.data = assignments
+            } else {
+                result.datas = assignments
+            }
+            response.status(200).json(result);
         }
     } catch (error) {
         console.error(error);
