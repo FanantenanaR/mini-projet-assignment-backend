@@ -28,7 +28,7 @@ const getAllStudentAssignmentEndPoint = async (request, response) => {
 };
 
 const insertAssignmentStudentEndPoint = async (request, response) => {
-    const { assignmentId, studentId, remarkFromStudent } = request.body;
+    const { assignmentId, studentId, remarkFromStudent, linkAssignment } = request.body;
     const student = await getStudentById(studentId);
     if (!student) {
         response.status(404).json({ message: 'Student not found' });
@@ -49,7 +49,8 @@ const insertAssignmentStudentEndPoint = async (request, response) => {
             name: `${student.firstname} ${student.lastname ?? ""}`,
             email: student.email,
             profilePicture: student.profilPicture,
-        }
+        },
+        linkAssignment
     );
 
     response.status(200).json({

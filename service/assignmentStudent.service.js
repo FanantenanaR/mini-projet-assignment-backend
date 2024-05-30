@@ -9,12 +9,13 @@ const getAllStudentAssignment = async (id) => {
     }
 }
 
-const insertStudentAssignment = async (details, assignment, student ) => {
+const insertStudentAssignment = async (details, assignment, student, linkAssignment ) => {
     return await AssignmentStudent.create({
         remarkFromStudent: details.remarkFromStudent,
         dateSubmit: details.dateSubmit,
         assignment: assignment,
-        student: student
+        student: student,
+        linkAssignment: linkAssignment
     });
 }
 

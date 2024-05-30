@@ -80,6 +80,10 @@ const AssignmentStudentSchema = new Schema({
     remark: { 
         type: String,
         default: ''
+    },
+    linkAssignment: {
+        type: String,
+        default: ''
     }
 }, {
     collection: 'assignmentStudent'
