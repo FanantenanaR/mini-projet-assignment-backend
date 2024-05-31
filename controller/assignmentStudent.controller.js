@@ -1,4 +1,4 @@
-const { getAllStudentAssignment, insertStudentAssignment, getAssignmentStudentBySybject} = require('../service/assignmentStudent.service');
+const { getAllStudentAssignment, insertStudentAssignment, getAssignmentStudentBySybject, getAssignmentNoted} = require('../service/assignmentStudent.service');
 const {getStudentById} = require("../service/student.service");
 const {getAllProfAssignment} = require("../service/assignmentProf.service");
 const AssignmentStudent = require('../model/assignmentStudent.model');
@@ -80,6 +80,26 @@ const getAssignmentStudentBySybjectEndPoint = async (request, response) => {
     }
 };
 
+const getAssignmentNotedEndPoint = async (request, response) => {
+    const {isNoted} = request.params;
+    const {subjectId} = request.params;
+    try {
+        const assignments = await getAssignmentNoted(isNoted, subjectId);
+        if (!assignments) {
+            response.status(404).json({ message: 'Assignments not found' });
+        } else {
+            response.status(200).json({
+                status: 200,
+                message: "Success",
+                datas: assignments
+            });
+        }
+    } catch (error) {
+        console.error(error);
+        response.status(500).json({ message: 'Internal server error' });
+    }
+}
+
 const getAssignmentStudentPaginate = (req, res) => {
     let aggregateQuery = AssignmentStudent.aggregate();
     AssignmentStudent.aggregatePaginate(
@@ -92,14 +112,18 @@ const getAssignmentStudentPaginate = (req, res) => {
             if(err) {
                 res.send(err)
             }
-            res.send(data);
+
+            res.send({datas: data});
         }
     )
 }
+
+
 
 module.exports = {
     getAllStudentAssignmentEndPoint,
     insertAssignmentStudentEndPoint,
     getAssignmentStudentBySybjectEndPoint,
-    getAssignmentStudentPaginate
+    getAssignmentStudentPaginate,
+    getAssignmentNotedEndPoint
 };
