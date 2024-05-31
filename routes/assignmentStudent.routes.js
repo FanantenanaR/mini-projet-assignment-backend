@@ -16,6 +16,4 @@ router.post('/', insertAssignmentStudentEndPoint);
 
 router.get('/subject/:subjectId?', getAssignmentStudentBySybjectEndPoint);
 
-
-
 module.exports = router
