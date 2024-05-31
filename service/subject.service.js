@@ -1,5 +1,4 @@
 const Subject = require('../model/subject.model')
-const {ObjectId} = require("mongodb");
 
 const getAllSubject = async (title = null, prof = null, orderBy= {}, doPagination = true, page = 1, limit = 10) => {
     try {
