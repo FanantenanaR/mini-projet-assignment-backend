@@ -2,6 +2,7 @@ const {getAllProfAssignment, insertProfAssignment} = require("../service/assignm
 const {getProfById} = require("../service/prof.service");
 const {getSubjectById} = require("../service/subject.service");
 const {evaluateStudentAssignment} = require("../service/assignmentStudent.service");
+const AssignmentProf = require("../model/assignmentProf.model");
 
 const getAllProfAssignmentEndPoint = async (request, response) => {
     const {id} = request.params;
@@ -76,8 +77,26 @@ const evaluateAssignmentStudentEndPoint = async (request, response) => {
     })
 }
 
+const getAssignmentProfPaginate = (req, res) => {
+    let aggregateQuery = AssignmentProf.aggregate();
+    AssignmentProf.aggregatePaginate(
+        aggregateQuery,
+        {
+            page: parseInt(req.query.page) || 1,
+            limit: parseInt(req.query.limit) || 10
+        },
+        (err, data) => {
+            if(err) {
+                res.send(err)
+            }
+            res.send(data);
+        }
+    )
+}
+
 module.exports = {
     getAllProfAssignmentEndPoint,
     insertAssignmentProfEndPoint,
-    evaluateAssignmentStudentEndPoint
+    evaluateAssignmentStudentEndPoint,
+    getAssignmentProfPaginate
 }

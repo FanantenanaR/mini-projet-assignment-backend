@@ -1,7 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const { getAllStudentAssignmentEndPoint, insertAssignmentStudentEndPoint, getAssignmentStudentBySybjectEndPoint, getAssignmentStudentPaginate} = require('../controller/assignmentStudent.controller');
+const { 
+    getAllStudentAssignmentEndPoint, 
+    insertAssignmentStudentEndPoint, 
+    getAssignmentStudentBySybjectEndPoint, 
+    getAssignmentStudentPaginate
+} = require('../controller/assignmentStudent.controller');
 
 router.get('/paginate/', getAssignmentStudentPaginate);
 

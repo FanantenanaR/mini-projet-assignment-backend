@@ -4,8 +4,11 @@ const router = express.Router();
 const {
     getAllProfAssignmentEndPoint,
     insertAssignmentProfEndPoint,
-    evaluateAssignmentStudentEndPoint
+    evaluateAssignmentStudentEndPoint,
+    getAssignmentProfPaginate
 } = require('../controller/assignmentProf.controller');
+
+router.get('/paginate/', getAssignmentProfPaginate);
 
 router.get('/:id?', getAllProfAssignmentEndPoint);
 
