@@ -1,6 +1,7 @@
 const { getAllStudentAssignment, insertStudentAssignment, getAssignmentStudentBySybject} = require('../service/assignmentStudent.service');
 const {getStudentById} = require("../service/student.service");
 const {getAllProfAssignment} = require("../service/assignmentProf.service");
+const AssignmentStudent = require('../model/assignmentStudent.model');
 
 const getAllStudentAssignmentEndPoint = async (request, response) => {
     const {id} = request.params;
@@ -79,8 +80,26 @@ const getAssignmentStudentBySybjectEndPoint = async (request, response) => {
     }
 };
 
+const getAssignmentStudentPaginate = (req, res) => {
+    let aggregateQuery = AssignmentStudent.aggregate();
+    AssignmentStudent.aggregatePaginate(
+        aggregateQuery,
+        {
+            page: parseInt(req.query.page) || 1,
+            limit: parseInt(req.query.limit) || 10
+        },
+        (err, data) => {
+            if(err) {
+                res.send(err)
+            }
+            res.send(data);
+        }
+    )
+}
+
 module.exports = {
     getAllStudentAssignmentEndPoint,
     insertAssignmentStudentEndPoint,
-    getAssignmentStudentBySybjectEndPoint
+    getAssignmentStudentBySybjectEndPoint,
+    getAssignmentStudentPaginate
 };
