@@ -19,14 +19,31 @@ Utilisez la commande `npm run dev` pour lancer le projet.
 
 ## Scénario du projet
 Il y a 2 rôle pour les utilisateurs: 
-- professeur
+- professeur 
 - étudiant
 
-Connecté en tant que `Etudiant`, 
+### Connecté en tant que `Etudiant`, 
+Email
+```
+fanantenanaran@gmail.com
+```
+Password
+```
+password24
+```
+
 - il peut voir tous les devoirs publiés par les professeurs.
 - il peut rendre les devoirs demandés.
 
-Connecté en tant que `Professeur`,
+### Connecté en tant que `Professeur`,
+Email
+```
+michelbuffa@gmail.com
+```
+Password
+```
+password24
+```
 - il peut voir les devoirs rendus par les élèves et les noter
 - il peut ajouter d'autres élèves
 - il peut ajouter d'autres professeurs
