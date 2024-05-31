@@ -1,0 +1,21 @@
+{
+  "data": [
+    {
+      "_id": "",
+      "firstname": "Lafatra",
+      "lastname": "Ravelojaona",
+      "email": "lafatraravelojaona5@gmail.com",
+      "password": "password24",
+      "profilPicture": "https://media.licdn.com/dms/image/D4D03AQHSWl5oQvvAFw/profile-displayphoto-shrink_800_800/0/1671536708107?e=1722470400&v=beta&t=X7N85h-GGdVOoXBs5TDB0-iESI6_B0zaH_c9HEsqLJQ"
+    },
+    {
+      "_id":  "66543a6c109b806d4c3dff8b",
+      "firstname": "Fanantenana",
+      "lastname": "Randriamahefa",
+      "email": "fanantenanaran@gmail.com",
+      "password": "password24",
+      "profilPicture":  "https://media.licdn.com/dms/image/C5603AQGo7vURB7DzLg/profile-displayphoto-shrink_800_800/0/1558580194728?e=1722470400&v=beta&t=-eKnXuq2QqPfCk8V0P0s4aEEoJdEo0t7VQ-_4bU5ou8",
+      "isAdmin":  true
+    }
+  ]
+}

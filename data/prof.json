@@ -1,0 +1,85 @@
+{
+  "data": [
+    {
+      "_id": "665988cde5db0f9270bfbd5b",
+      "firstname": "Michel",
+      "lastname": "Buffa",
+      "email": "michelbuffa@gmail.com",
+      "password": "password24",
+      "profilPicture": "https://media.licdn.com/dms/image/D5603AQHvk0G03bedmQ/profile-displayphoto-shrink_800_800/0/1648538147466?e=1722470400&v=beta&t=U9DjdqgdgGMZ4w8lIPdJO5zM9VtKMFkZFDX9wzKwErU",
+      "isAdmin": true
+    },
+    {
+      "_id":  "66543a6c109b806d4c3dff8b",
+      "firstname": "Rojo",
+      "lastname": "Rabenanahary",
+      "email": "rojorabenanahary@gmail.com",
+      "password": "password24",
+      "profilPicture":  "https://media.licdn.com/dms/image/C5603AQGo7vURB7DzLg/profile-displayphoto-shrink_800_800/0/1558580194728?e=1722470400&v=beta&t=-eKnXuq2QqPfCk8V0P0s4aEEoJdEo0t7VQ-_4bU5ou8",
+      "isAdmin":  true
+    },
+    {
+      "_id": "6648f1b9ec3833e50b153500",
+      "firstname": "Gabriel",
+      "lastname": "Mopolo",
+      "email": "gabrielmopolo@gmail.com",
+      "password": "password24",
+      "profilPicture": "https://media.licdn.com/dms/image/C4E03AQHUszC0EvVQrQ/profile-displayphoto-shrink_800_800/0/1517725153944?e=1722470400&v=beta&t=ZnF5eBjmzQKBarSX1hrsr1D619U7JJwKZngDdSPav-E",
+      "isAdmin": false
+    },
+    {
+      "_id":  "664a7f3596c6171004ff490c",
+      "firstname": "Grégory",
+      "lastname": "Galli",
+      "email": "gregorygalli@gmail.com",
+      "password": "password24",
+      "profilPicture":  "https://media.licdn.com/dms/image/C4D03AQF5MZ5BK29pkw/profile-displayphoto-shrink_800_800/0/1583941426402?e=1722470400&v=beta&t=cnlnUYfO-WJxPMLtqotETLrKQh1BK398xQR9NGVGy0E",
+      "isAdmin": false
+    },
+    {
+      "_id":  "6658f25eff4e6040389d181e",
+      "firstname": "Richard",
+      "lastname": "Grin",
+      "email": "richardgrin@gmail.com",
+      "password": "password24",
+      "profilPicture":  "http://richard.grin.free.fr/photo.jpg",
+      "isAdmin": false
+    },
+    {
+      "_id":  "6658f43c6caa7d136cb3395f",
+      "firstname": "Dominique",
+      "lastname": "Ribouchon",
+      "email": "domribouchon@gmail.com",
+      "password": "password24",
+      "profilPicture":  "https://media.licdn.com/dms/image/C4D03AQFHz4XFb7Mg-w/profile-displayphoto-shrink_800_800/0/1540286337975?e=1722470400&v=beta&t=wHNlUokagB4JNAZJA2tFavgSliskJHZatCFc8PzRLLg",
+      "isAdmin": false
+    },
+    {
+      "_id":  "6658f2ad92222d49382e2e11",
+      "firstname": "Nicolas",
+      "lastname": "Pasquier",
+      "email": "nicolaspasquier@gmail.com",
+      "password": "password24",
+      "profilPicture":  "https://univ-cotedazur.fr/medias/photo/photo_1624372013519-png",
+      "isAdmin": false
+    },
+    {
+      "_id":  "6658f306aa489518e4b89c48",
+      "firstname": "Tsinjo Tony",
+      "lastname": "Rakotomalala",
+      "email": "tsinjotonyr@gmail.com",
+      "password": "password24",
+      "profilPicture":  "https://media.licdn.com/dms/image/C5103AQHdfRqTKb0x5A/profile-displayphoto-shrink_800_800/0/1517882853861?e=1722470400&v=beta&t=pBY2sE-weNRKcUuLwnRwoT1elJufiE6V81K7_eNty0Y",
+      "isAdmin": false
+    },
+    {
+      "_id":  "665989f3e5db0f9270bfbd5c",
+      "firstname": "Vahatriniaina",
+      "lastname": "Rakotomalala",
+      "email": "rvahatriniaina@gmail.com",
+      "password": "password24",
+      "profilPicture":  "https://media.licdn.com/dms/image/C4E03AQHshAYUjfm5dg/profile-displayphoto-shrink_800_800/0/1516271158029?e=1722470400&v=beta&t=UCBPPkCPoBEK4ncOLxGQrm8A7ESuUmm6RXZS0dcUM10",
+      "isAdmin": false
+    }
+  ]
+}
