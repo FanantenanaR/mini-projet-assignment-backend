@@ -3,7 +3,7 @@
 
 51 - RAVELOJAONA Lafatra Ravaka Fitia
 
-## Etape pour faire marcher ce projet localement
+## Instruction pour la prise en main du projet
 ### Environnement
 Assurez-vous que vous avez nodeJs. `node -v`
 
@@ -16,3 +16,23 @@ Une fois le clonage faite, lancer `npm i` pour avoir les paquets nécéssaire ut
 
 ### Lancement du projet
 Utilisez la commande `npm run dev` pour lancer le projet.
+
+## Scénario du projet
+Il y a 2 rôle pour les utilisateurs: 
+- professeur
+- étudiant
+
+Connecté en tant que `Etudiant`, 
+- il peut voir tous les devoirs publiés par les professeurs.
+- il peut rendre les devoirs demandés.
+
+Connecté en tant que `Professeur`,
+- il peut voir les devoirs rendus par les élèves et les noter
+- il peut ajouter d'autres élèves
+- il peut ajouter d'autres professeurs
+
+La liste des professeurs est accessible à tous.
+
+
+
+
