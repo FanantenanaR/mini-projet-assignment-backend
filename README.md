@@ -3,7 +3,7 @@
 
 51 - RAVELOJAONA Lafatra Ravaka Fitia
 
-## Etape pour faire marcher ce projet localement
+## Instruction pour la prise en main du projet
 ### Environnement
 Assurez-vous que vous avez nodeJs. `node -v`
 
