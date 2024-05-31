@@ -31,7 +31,5 @@ let studentSchema = Schema({
 studentSchema.plugin(mongoosePaginate);
 
 const Student = mongoose.model('Student', studentSchema);
-// C'est à travers ce modèle Mongoose qu'on pourra faire le CRUD
-// assignment est le nom de la collection dans la base de données
-// Mongoose tolère certaines erreurs dans le nom (ex: Assignent au lieu de assignments)
+
 module.exports = Student;

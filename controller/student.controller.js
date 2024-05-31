@@ -1,6 +1,6 @@
-const {getAllSubject, getSubjectById, insertSubject, updateSubject, deleteSubject} = require("../service/subject.service");
+const { getStudents, getStudentById, insertStudent, updateStudent, deleteStudent } = require("../service/student.service");
 
-const getAllSubjectsEndPoint = async (request, response) => {
+const getAllStudentsEndPoint = async (request, response) => {
     try {
         const preLimit = request.query.limit;
         const limit = preLimit && !isNaN(preLimit) && parseInt(preLimit) > 0 ? parseInt(preLimit) : 10;
@@ -23,40 +23,38 @@ const getAllSubjectsEndPoint = async (request, response) => {
             orderBy[orderMe[0]] = orderMe[1];
         } else {
             orderBy = {
-                title: "asc"
+                firstname: "asc"
             }
         }
 
-        const { title, prof } = request.query;
-        console.log("prof value", prof, typeof prof);
-        console.log("title value", title);
+        const { name } = request.query;
+        console.log("name value", name, typeof name);
         const searchInput =
-            !title || title.trim() === "null" || title.trim() === ""
+            !name || name.trim() === "null" || name.trim() === ""
                 ? null
-                : title.toLowerCase();
-        const searchProf = !prof || prof.trim() === "null" || prof.trim() === "" ? null : prof;
-        const subjects = await getAllSubject(searchInput, searchProf, orderBy, doPagination, page, limit);
+                : name.toLowerCase();
+        const subjects = await getStudents(searchInput, orderBy, doPagination, page, limit);
         response.status(200).json(subjects);
     } catch (err) {
         response.status(500).json({ message: err.message });
     }
 }
 
-const getSubjectByIdEndPoint = async (request, response) => {
+const getStudentByIdEndPoint = async (request, response) => {
     try {
         const id = request.params.id;
 
         if (!id) {
             response.status(400).json({ message: 'Missing parameter id' });
         } else {
-            const subject = await getSubjectById(id);
-            if (!subject) {
-                response.status(404).json({ message: 'Subject not found' });
+            const student = await getStudentById(id);
+            if (!student) {
+                response.status(404).json({ message: 'student not found' });
             } else {
                 response.status(200).json({
                     status: 200,
-                    message: "A Subject",
-                    data: subject
+                    message: "A student",
+                    data: student
                 });
             }
         }
@@ -65,17 +63,20 @@ const getSubjectByIdEndPoint = async (request, response) => {
     }
 }
 
-const insertSubjectEndPoint = async (request, response) => {
+const insertStudentEndPoint = async (request, response) => {
     try {
-        const { title, prof, illustration = ""} = request.body;
-        if (!title || !prof) {
-            const missing = (!title ? "title" : "") + (!title && !prof ? ", " : "") + (!prof ? "prof" : "");
+        const { firstname, lastname, email, password, profilPicture = ""} = request.body;
+        if (!firstname || !lastname || !email || !password) {
+            let missing = (!firstname ? "firstname" : "");
+            missing += (missing !== "" && !lastname ? missing + ", " : "") + (!lastname ? "lastname" : "");
+            missing += (missing !== "" && !email ? missing + ", " : "") + (!email ? "email" : "");
+            missing += (missing !== "" && !password ? missing + ", " : "") + (!password ? "password" : "");
             response.status(400).json({ message: `Missing parameter: ${missing}`});
         } else {
-            const newSubject = await insertSubject(title, prof, illustration);
+            const newSubject = await insertStudent(firstname, lastname, email, password, profilPicture ?? "");
             response.status(201).json({
                 status: 201,
-                message: "Subject inserted",
+                message: "student inserted",
                 data: newSubject
             });
         }
@@ -84,24 +85,23 @@ const insertSubjectEndPoint = async (request, response) => {
     }
 }
 
-const updateSubjectEndPoint = async (request, response) => {
+const updateStudentEndPoint = async (request, response) => {
     try {
-        const { title, prof, illustration} = request.body;
+        const { firstname, lastname, profilPicture } = request.body;
         const id = request.params.id;
         if (!id) {
             response.status(400).json({ message: `Missing parameter: id`});
         } else {
             const update = {
-                id,
-                ...(title && { title }),
-                ...(prof && { prof }),
-                ...(illustration && { illustration })
+                ...(firstname && { firstname }),
+                ...(lastname && { lastname }),
+                ...(profilPicture && { profilPicture })
             };
-            const newSubject = await updateSubject(update);
+            const newStudent = await updateStudent(id, update);
             response.status(201).json({
                 status: 201,
-                message: "Subject inserted",
-                data: newSubject
+                message: "Student updated",
+                data: newStudent
             });
         }
     } catch (err) {
@@ -109,17 +109,17 @@ const updateSubjectEndPoint = async (request, response) => {
     }
 }
 
-const deleteSubjectEndPoint = async (request, response) => {
+const deleteStudentEndPoint = async (request, response) => {
     try {
         const { id} = request.body;
         if (!id) {
             response.status(400).json({ message: `Missing parameter: id`});
         } else {
-            const newSubject = await deleteSubject(id);
-            if (newSubject) {
+            const isDeleted = await deleteStudent(id);
+            if (isDeleted) {
                 response.status(201).json({
                     status: 201,
-                    message: 'Subject deleted'
+                    message: 'Student deleted'
                 });
             } else {
                 response.status(422).json({
@@ -134,11 +134,10 @@ const deleteSubjectEndPoint = async (request, response) => {
     }
 }
 
-
 module.exports = {
-    getAllSubjectsEndPoint,
-    getSubjectByIdEndPoint,
-    insertSubjectEndPoint,
-    updateSubjectEndPoint,
-    deleteSubjectEndPoint,
+    getAllStudentsEndPoint,
+    getStudentByIdEndPoint,
+    insertStudentEndPoint,
+    updateStudentEndPoint,
+    deleteStudentEndPoint
 }
