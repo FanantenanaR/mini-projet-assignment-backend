@@ -31,9 +31,17 @@ const getAssignmentStudentBySybject = async (subjectId) => {
     return await AssignmentStudent.find({ "assignment.subject._id": subjectId });
 }
 
+const getAssignmentNoted = async (isNoted, subjectId) => {
+    return await AssignmentStudent.find({
+        "assignment.subject._id": subjectId,
+        "note": { $exists: isNoted }
+    });
+}
+
 module.exports = {
     getAllStudentAssignment,
     insertStudentAssignment,
     evaluateStudentAssignment,
-    getAssignmentStudentBySybject
+    getAssignmentStudentBySybject,
+    getAssignmentNoted
 }
